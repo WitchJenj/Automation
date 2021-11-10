@@ -1,20 +1,12 @@
-from contextlib import ExitStack
+from point import Point
+
 from time import time
 import pyautogui
 import time
 
-from win32 import win32api
+from walker import Walker, Direction
 
-from threading import Timer
-
-from dataclasses import dataclass
-
-@dataclass
-class Direction:
-    forward = 'W'
-    back = 'S'
-    left = 'A'
-    right = 'D'
+# from threading import Timer
 
 # # class Planer:
 # #     def __init__(self):
@@ -34,20 +26,10 @@ class Direction:
 # print(planer.get_twenty())
 # print(planer.calculate())
 
-middleCellMoveSeconds = 0.08
-oneCellMoveSeconds = 0.5
-
-def moveFor(direction, seconds, finalizationSeconds=0.2):
-    pyautogui.keyDown(direction)
-    time.sleep(seconds)
-    pyautogui.keyUp(direction)
-    time.sleep(finalizationSeconds)
-
-def moveBy(direction, count, finalizationSeconds=0.2):
-    moveFor(direction, count * oneCellMoveSeconds + (count - 1) * middleCellMoveSeconds, finalizationSeconds)
 
 screenWidth, sreenHeight = pyautogui.size()
 currentMouseX, currentMouseY = pyautogui.position()
+
 
 time.sleep(5)
 
@@ -55,8 +37,6 @@ time.sleep(5)
 pyautogui.press("esc")
 
 time.sleep(0.5)
-
-win32api.mouse_event(1, -100, 0, 0, 0)
 
 
 # pyautogui.move(-350, 0, duration=2, tween=pyautogui.easeInCubic)
@@ -67,10 +47,15 @@ win32api.mouse_event(1, -100, 0, 0, 0)
 #     moveBy(Direction.left, 1)
 # t = Timer(5, go)  
 # t.start()
-moveBy(Direction.left, 1)
-moveBy(Direction.forward, 14)
-moveBy(Direction.right, 6)
-moveBy(Direction.forward, 2)
+
+walker = Walker()
+
+walker.rotateBy(Point(-100, 0))
+
+walker.moveBy(Direction.left, 1)
+walker.moveBy(Direction.forward, 14)
+walker.moveBy(Direction.right, 6)
+walker.moveBy(Direction.forward, 2)
 
 
 # pyautogui.move(-350, 0, duration=2, tween=pyautogui.easeOutExpo)
