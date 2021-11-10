@@ -68,8 +68,8 @@ win32api.mouse_event(1, -100, 0, 0, 0)
 # t = Timer(5, go)  
 # t.start()
 # moveBy(Direction.left, 1)
-# moveBy(Direction.forward, 14)
-# moveBy(Direction.right, 6)
+moveBy(Direction.forward, 14)
+moveBy(Direction.right, 6)
 # moveBy(Direction.forward, 2)
 
 
